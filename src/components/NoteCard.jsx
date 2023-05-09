@@ -31,7 +31,7 @@ export const NoteCard = ({ note, isDetail = false, setState, page }) => {
     return (
       <>
         <img
-          className="detailIcons"
+          className="icon-button"
           src={isArchived ? archivedActiveIcons : archivedNonActiveIcons}
           alt="simpan"
           onClick={
@@ -54,30 +54,32 @@ export const NoteCard = ({ note, isDetail = false, setState, page }) => {
   const Delete = () => {
     return (
       <img
-        className="detailIcons"
+        className="icon-button"
         src={deleteNoteIcons}
         alt="hapus"
         onClick={() => {
           deleteNote(id);
-          setState(getAllNotes());
+          setState(getNotes(page));
         }}
       />
     );
   };
   return (
-    <>
-      <div className="noteCard">
-        <Archived />
-        <Delete />
-        <p
-          className={isDetail ? 'noteTitle' : 'noteTitleDetail'}
-          onClick={isDetail ? toDetail : undefined}
+    <article>
+      <div className="note-card">
+        <div className="flex-between">
+          <Archived />
+          <Delete />
+        </div>
+        <h3
+          className={isDetail ? 'note-title-detail' : 'note-title'}
+          onClick={isDetail ? undefined : toDetail}
         >
           {title}
-        </p>
-        <p className="noteDate">{date}</p>
-        <p className="noteBody">{body}</p>
+        </h3>
+        <p className="note-date">{date}</p>
+        <p className="note-body">{body}</p>
       </div>
-    </>
+    </article>
   );
 };

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { NoteCard } from '../components/NoteCard';
 import { getAllNotes } from '../utils/local-data';
 import { Navbar } from '../components/Navbar';
+import { FileEmpty } from './FileEmpty';
 
 export const NotesPage = () => {
   const [notes, setNotes] = useState([]);
-  const [page, setPage] = useState('allnotess');
+  const [page, setPage] = useState('allnotes');
   useEffect(() => {
     setNotes(getAllNotes());
   }, []);
@@ -13,22 +14,25 @@ export const NotesPage = () => {
   return (
     <>
       <Navbar setState={setNotes} setPage={setPage} />
-      {notes.length === 0 ? (
-        <p>Belum ada Catatan disini</p>
-      ) : (
-        <div className="mt2">
-          {notes.map((note) => {
-            return (
-              <NoteCard
-                note={note}
-                key={note.id}
-                setState={setNotes}
-                page={page}
-              />
-            );
-          })}
-        </div>
-      )}
+      <main>
+        <section className="search">untuk searching</section>
+        {notes.length === 0 ? (
+          <FileEmpty />
+        ) : (
+          <section className="mt2 note-container">
+            {notes.map((note) => {
+              return (
+                <NoteCard
+                  note={note}
+                  key={note.id}
+                  setState={setNotes}
+                  page={page}
+                />
+              );
+            })}
+          </section>
+        )}
+      </main>
     </>
   );
 };

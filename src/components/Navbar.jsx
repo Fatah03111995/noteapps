@@ -14,17 +14,17 @@ export const Navbar = ({ setState, setPage }) => {
     else return '';
   };
   return (
-    <div className="flex-between navbar-container">
-      <div
+    <header className="flex-between navbar-container">
+      <nav
         onClick={() => {
           navigate('/');
         }}
         className="navbar-title"
       >
         MyNoteApps
-      </div>
-      <div className="flex-between" style={{ gap: '20px' }}>
-        <div
+      </nav>
+      <nav className="flex-between" style={{ gap: '20px' }}>
+        <li
           id="allnotes"
           className={`navbar-button ${isActive('allnotes')}`}
           onClick={(e) => {
@@ -34,8 +34,8 @@ export const Navbar = ({ setState, setPage }) => {
           }}
         >
           All Notes
-        </div>
-        <div
+        </li>
+        <li
           id="active"
           className={`navbar-button ${isActive('active')}`}
           onClick={(e) => {
@@ -45,8 +45,8 @@ export const Navbar = ({ setState, setPage }) => {
           }}
         >
           Active
-        </div>
-        <div
+        </li>
+        <li
           id="archive"
           className={`navbar-button ${isActive('archive')}`}
           onClick={(e) => {
@@ -56,8 +56,8 @@ export const Navbar = ({ setState, setPage }) => {
           }}
         >
           Archive
-        </div>
-      </div>
-    </div>
+        </li>
+      </nav>
+    </header>
   );
 };

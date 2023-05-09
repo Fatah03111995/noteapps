@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-*,
-html {
-  margin: 0;
-  font-family: 'Roboto';
+:root {
+  --blue-dark: #040c25;
   --blue: #0fb2fd;
   --blue-medium: #74d3ff;
   --blue-light: #a1f1ff;
   --white: #ececec;
+  --red: #ee0000;
+  --red-light: #f3aaaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto';
+  box-sizing: border-box;
 }
 
 .flex-between {
@@ -16,37 +23,38 @@ html {
   align-items: center;
 }
 
-.mt1 {
-  margin-top: 1rem;
+li {
+  list-style-type: none;
 }
 
-.mt2 {
-  margin-top: 1.5rem;
-}
-
-.mt3 {
-  margin-top: 2rem;
+main {
+  margin: 0 auto;
+  padding: 2rem;
+  width: 90%;
+  max-width: 1000px;
+  min-height: 100vh;
 }
 
 .navbar-container {
   padding: 0 2rem;
   background-color: var(--blue);
-  height: 70px;
+  position: sticky;
+  top: 0;
 }
 
 .navbar-title {
-  padding: 10px;
-  font-size: 30px;
+  padding: 0.5rem;
+  font-size: 1.7rem;
   color: var(--white);
   cursor: pointer;
 }
 
 .navbar-button {
   color: var(--white);
-  padding: 1rem;
+  padding: 0.5rem;
   text-align: center;
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-weight: bold;
 }
 
@@ -61,4 +69,89 @@ html {
 .navbar-button-active {
   background-color: var(--white);
   color: var(--blue);
+}
+
+.file-empty {
+  background-color: var(--red-light);
+  color: var(--red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto 0 auto;
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.note-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 1rem 0.5rem;
+  gap: 1.3rem;
+  justify-content: space-between;
+  align-content: space-between;
+  width: 100%;
+}
+
+.note-card {
+  border-radius: 0.7rem;
+  color: var(--blue-dark);
+  padding: 1.5rem;
+  height: 100%;
+  border: 2px solid var(--blue-dark);
+}
+
+.note-title {
+  color: var(--blue);
+  margin: 0.6rem 0 0.3rem 0;
+  font-size: 1.4rem;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.note-date {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+.note-body {
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+}
+
+.note-title:hover {
+  color: var(--blue-medium);
+}
+
+@media only screen and (min-width: 600px) {
+  .note-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .note-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+}
+
+img.icon-button {
+  background-color: var(--blue);
+  padding: 0.5rem;
+  font-size: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+img.icon-button:hover {
+  background-color: var(--blue-medium);
 }
