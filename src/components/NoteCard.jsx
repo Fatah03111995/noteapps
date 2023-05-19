@@ -5,11 +5,7 @@ import archivedActiveIcons from '../icons/archivedActive.svg';
 import archivedNonActiveIcons from '../icons/archivedNonActive.svg';
 import deleteNoteIcons from '../icons/deleteNote.svg';
 import { showFormattedDate } from '../utils';
-import {
-  getAllNotes,
-  getActiveNotes,
-  getArchivedNotes,
-} from '../utils/local-data';
+import { getNoteByPage } from '../utils/local-data';
 
 export const NoteCard = ({ note, isDetail = false, setState, page }) => {
   const id = note.id;
@@ -19,13 +15,9 @@ export const NoteCard = ({ note, isDetail = false, setState, page }) => {
   const isArchived = note.archived;
   const date = showFormattedDate(createdAt);
   const navigate = useNavigate();
-  const getNotes = (page) => {
-    if (page === 'allnotes') return getAllNotes;
-    if (page === 'active') return getActiveNotes;
-    if (page === 'archive') return getArchivedNotes;
-  };
+
   const toDetail = () => {
-    navigate(`/${id}`);
+    navigate(`/detail/${id}`);
   };
   const Archived = () => {
     return (
@@ -37,14 +29,12 @@ export const NoteCard = ({ note, isDetail = false, setState, page }) => {
           onClick={
             isArchived
               ? () => {
-                  console.log('tidak disimpan');
                   unarchiveNote(id);
-                  setState(getNotes(page)());
+                  setState(getNoteByPage(page));
                 }
               : () => {
-                  console.log('disimpan');
                   archiveNote(id);
-                  setState(getNotes(page)());
+                  setState(getNoteByPage(page));
                 }
           }
         />
@@ -59,15 +49,15 @@ export const NoteCard = ({ note, isDetail = false, setState, page }) => {
         alt="hapus"
         onClick={() => {
           deleteNote(id);
-          setState(getNotes(page));
+          setState(getNoteByPage(page));
         }}
       />
     );
   };
   return (
     <article>
-      <div className="note-card">
-        <div className="flex-between">
+      <div className={isDetail ? 'note-card-detail' : 'note-card'}>
+        <div className="flex-between" style={{ height: '2rem' }}>
           <Archived />
           <Delete />
         </div>
@@ -77,8 +67,8 @@ export const NoteCard = ({ note, isDetail = false, setState, page }) => {
         >
           {title}
         </h3>
-        <p className="note-date">{date}</p>
-        <p className="note-body">{body}</p>
+        <p className={isDetail ? 'note-date-detail' : 'note-date'}>{date}</p>
+        <p className={isDetail ? 'note-body-detail' : 'note-body'}>{body}</p>
       </div>
     </article>
   );

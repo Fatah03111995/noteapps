@@ -1,18 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  getActiveNotes,
-  getArchivedNotes,
-  getAllNotes,
-} from '../utils/local-data';
 import { useState } from 'react';
 
-export const Navbar = ({ setState, setPage }) => {
+export const Navbar = ({ setPage }) => {
   const navigate = useNavigate();
   const [activeBtn, setActiveBtn] = useState('');
   const isActive = (id) => {
     if (activeBtn === id) return 'navbar-button-active';
     else return '';
   };
+
   return (
     <header className="flex-between navbar-container">
       <nav
@@ -29,7 +25,6 @@ export const Navbar = ({ setState, setPage }) => {
           className={`navbar-button ${isActive('allnotes')}`}
           onClick={(e) => {
             setPage('allnotes');
-            setState(getAllNotes());
             setActiveBtn(e.target.id);
           }}
         >
@@ -40,7 +35,6 @@ export const Navbar = ({ setState, setPage }) => {
           className={`navbar-button ${isActive('active')}`}
           onClick={(e) => {
             setPage('active');
-            setState(getActiveNotes());
             setActiveBtn(e.target.id);
           }}
         >
@@ -51,7 +45,6 @@ export const Navbar = ({ setState, setPage }) => {
           className={`navbar-button ${isActive('archive')}`}
           onClick={(e) => {
             setPage('archive');
-            setState(getArchivedNotes());
             setActiveBtn(e.target.id);
           }}
         >

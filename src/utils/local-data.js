@@ -112,6 +112,18 @@ function editNote({ id, title, body }) {
   });
 }
 
+function searchNote(notes, keyword) {
+  return notes.filter((note) => {
+    return note.title.toLowerCase().includes(keyword.toLowerCase());
+  });
+}
+
+function getNoteByPage(page) {
+  if (page === 'allnotes') return getAllNotes();
+  if (page === 'active') return getActiveNotes();
+  if (page === 'archive') return getArchivedNotes();
+}
+
 export {
   getAllNotes,
   getActiveNotes,
@@ -122,4 +134,6 @@ export {
   archiveNote,
   unarchiveNote,
   addNote,
+  searchNote,
+  getNoteByPage,
 };
